@@ -1,0 +1,62 @@
+ Image atividade-ponderada-m7-2026-ec-sophiahochman-api Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 663B 0.0s done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile.api
+#2 transferring dockerfile: 398B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.11-slim
+#3 DONE 0.0s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 147B 0.0s done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 DONE 0.0s
+
+#6 [1/6] FROM docker.io/library/python:3.11-slim@sha256:6f31d6e9ba2b0a787a3f81c37b004155b87b9efa1b771182bd550c1615745be5
+#6 resolve docker.io/library/python:3.11-slim@sha256:6f31d6e9ba2b0a787a3f81c37b004155b87b9efa1b771182bd550c1615745be5 0.0s done
+#6 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 4.07kB 0.0s done
+#5 DONE 0.0s
+
+#7 [2/6] WORKDIR /app
+#7 CACHED
+
+#8 [3/6] COPY requirements-api.txt .
+#8 CACHED
+
+#9 [4/6] RUN pip install --no-cache-dir -r requirements-api.txt
+#9 CACHED
+
+#10 [5/6] COPY api ./api
+#10 DONE 0.0s
+
+#11 [6/6] RUN useradd --create-home --uid 10001 appuser
+#11 DONE 0.3s
+
+#12 exporting to image
+#12 exporting layers 0.1s done
+#12 exporting manifest sha256:0d02a53a274057140cfa45f028fdde146a2331aef5702d9e1c45019718fb9e3e 0.0s done
+#12 exporting config sha256:08d9ce983488b63977cdb0bdea2161744d59bd11e0f905ea7079e89fd4b30f9b 0.0s done
+#12 exporting attestation manifest sha256:f2a0b29455e3395bd6b3c5aa3eaa5d87e540dfe5276c9cac3137bf5fe095da3f 0.0s done
+#12 exporting manifest list sha256:7abb1568b86cfa3413ed9ce0d4832adb83f11e9e283613e35622fb61cbdecd0c
+#12 exporting manifest list sha256:7abb1568b86cfa3413ed9ce0d4832adb83f11e9e283613e35622fb61cbdecd0c 0.0s done
+#12 naming to docker.io/library/atividade-ponderada-m7-2026-ec-sophiahochman-api:latest done
+#12 unpacking to docker.io/library/atividade-ponderada-m7-2026-ec-sophiahochman-api:latest 0.1s done
+#12 DONE 0.4s
+
+#13 resolving provenance for metadata file
+#13 DONE 0.0s
+ Image atividade-ponderada-m7-2026-ec-sophiahochman-api Built 
+ Container atividade-ponderada-m7-2026-ec-sophiahochman-api-1 Recreate 
+ Container atividade-ponderada-m7-2026-ec-sophiahochman-api-1 Recreated 
+ Container atividade-ponderada-m7-2026-ec-sophiahochman-api-1 Starting 
+ Container atividade-ponderada-m7-2026-ec-sophiahochman-api-1 Started 
+ Container atividade-ponderada-m7-2026-ec-sophiahochman-api-1 Waiting 
+ Container atividade-ponderada-m7-2026-ec-sophiahochman-api-1 Healthy 

@@ -1,0 +1,10 @@
+ Container atividade-ponderada-m7-2026-ec-sophiahochman-api-run-d47774c02871 Creating 
+ Container atividade-ponderada-m7-2026-ec-sophiahochman-api-run-d47774c02871 Created 
+PASS health {"status": "ok", "model_loaded": true, "symbol": "BTCUSDT", "forecast_date": "2026-01-01"}
+PASS predict {"date": "2026-01-01", "predicted_close": 87495.56, "quote_currency": "USDT", "symbol": "BTCUSDT", "model": "Prophet", "trained_until": "2025-12-31", "horizon_days": 1}
+PASS invalid_request {} HTTP 422
+PASS invalid_request {"date": "2026-02-30"} HTTP 422
+PASS invalid_request {"date": "2024-01-01"} HTTP 422
+PASS invalid_request {"date": "2026-01-02"} HTTP 422
+PASS invalid_request {"date": "2026-01-01", "extra": 1} HTTP 422
+PASS openapi

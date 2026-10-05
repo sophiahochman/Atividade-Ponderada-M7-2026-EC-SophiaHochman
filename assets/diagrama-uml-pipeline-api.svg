@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="800" viewBox="0 0 1600 800">
+<title>Diagrama UML de componentes e implantação da previsão BTCUSDT</title>
+<desc>Fonte, downloader, CSV, notebook, artefatos e backend FastAPI em Docker. Cliente envia HTTP ao backend, que devolve JSON. Artefatos são montados somente para leitura.</desc>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9" fill="#26344b"/></marker></defs>
+<rect width="1600" height="800" fill="#fff"/>
+<g font-family="Arial, sans-serif" fill="#15243c" font-size="18">
+<text x="40" y="38" font-size="24" font-weight="bold">Previsão de BTC/USDT · componentes e implantação</text>
+<rect x="35" y="85" width="280" height="170" fill="#e0efff" stroke="#496079" stroke-width="2"/>
+<text x="51" y="115" font-size="16">«external system»</text>
+<text x="51" y="146" font-size="21" font-weight="bold">Fonte de dados</text>
+<path d="M282,98 h19 v27 h-19 z M277,103 h10 v6 h-10 z M277,114 h10 v6 h-10 z" fill="#fff" stroke="#496079" stroke-width="1.5"/>
+<line x1="35" y1="162" x2="315" y2="162" stroke="#496079"/><text x="51" y="193" font-size="17">CryptoDataDownload</text><text x="51" y="220" font-size="17">Binance · BTCUSDT</text><rect x="395" y="85" width="290" height="170" fill="#e5f3e6" stroke="#496079" stroke-width="2"/>
+<text x="411" y="115" font-size="16">«component»</text>
+<text x="411" y="146" font-size="21" font-weight="bold">Script de download</text>
+<path d="M652,98 h19 v27 h-19 z M647,103 h10 v6 h-10 z M647,114 h10 v6 h-10 z" fill="#fff" stroke="#496079" stroke-width="1.5"/>
+<line x1="395" y1="162" x2="685" y2="162" stroke="#496079"/><text x="411" y="193" font-size="17">data/download_data.py</text><text x="411" y="220" font-size="17">valida e salva o histórico</text><rect x="795" y="85" width="345" height="190" fill="#fff3d6" stroke="#496079" stroke-width="2"/>
+<text x="811" y="115" font-size="16">«artifact»</text>
+<text x="811" y="146" font-size="21" font-weight="bold">Histórico diário</text>
+<path d="M1107,98 h12 l7,7 v20 h-19 z M1119,98 v7 h7" fill="#fff" stroke="#496079" stroke-width="1.5"/>
+<line x1="795" y1="162" x2="1140" y2="162" stroke="#496079"/><text x="811" y="193" font-size="17">btc_usd_2024_2025.csv</text><text x="811" y="220" font-size="17">731 dias · 2024 e 2025</text><text x="811" y="247" font-size="17">Date / Close / OHLC / Volume</text><rect x="1240" y="85" width="325" height="220" fill="#ece4ff" stroke="#496079" stroke-width="2"/>
+<text x="1256" y="115" font-size="16">«component»</text>
+<text x="1256" y="146" font-size="21" font-weight="bold">Notebook de treino</text>
+<path d="M1532,98 h19 v27 h-19 z M1527,103 h10 v6 h-10 z M1527,114 h10 v6 h-10 z" fill="#fff" stroke="#496079" stroke-width="1.5"/>
+<line x1="1240" y1="162" x2="1565" y2="162" stroke="#496079"/><text x="1256" y="193" font-size="17">treinamento_prophet.ipynb</text><text x="1256" y="220" font-size="17">avalia → seleciona → ajusta</text><text x="1256" y="247" font-size="17">Prophet.fit()</text><text x="1256" y="274" font-size="17">ambiente: notebook / Docker</text><path d="M315 170 H395" fill="none" stroke="#26344b" stroke-width="2"  marker-end="url(#arrow)"/><text x="355" y="155" text-anchor="middle" font-size="16">CSV remoto</text><path d="M685 170 H795" fill="none" stroke="#26344b" stroke-width="2"  marker-end="url(#arrow)"/><text x="740" y="155" text-anchor="middle" font-size="16">salva</text><path d="M1140 170 H1240" fill="none" stroke="#26344b" stroke-width="2"  marker-end="url(#arrow)"/><text x="1190" y="155" text-anchor="middle" font-size="16">lê</text><rect x="1220" y="370" width="345" height="180" fill="#fff3d6" stroke="#496079" stroke-width="2"/>
+<text x="1236" y="400" font-size="16">«artifact»</text>
+<text x="1236" y="431" font-size="21" font-weight="bold">Modelo e metadados</text>
+<path d="M1532,383 h12 l7,7 v20 h-19 z M1544,383 v7 h7" fill="#fff" stroke="#496079" stroke-width="1.5"/>
+<line x1="1220" y1="447" x2="1565" y2="447" stroke="#496079"/><text x="1236" y="478" font-size="17">prophet_model.json</text><text x="1236" y="505" font-size="17">training_metadata.json</text><text x="1236" y="532" font-size="17">serialização oficial Prophet</text><path d="M1402 305 V370" fill="none" stroke="#26344b" stroke-width="2"  marker-end="url(#arrow)"/><text x="1470" y="344" text-anchor="middle" font-size="16">exporta</text><path d="M405 380 L425 360 H1125 V705 L1105 725 H405 Z" fill="#e6f2fb" stroke="#496079" stroke-width="2"/>
+<path d="M405 380 H1105 L1125 360 M1105 380 V725" fill="none" stroke="#496079" stroke-width="2"/>
+<text x="430" y="414" font-size="17">«executionEnvironment»</text>
+<text x="430" y="445" font-size="22" font-weight="bold">Docker · serviço api</text><rect x="680" y="485" width="380" height="205" fill="#ffe5ee" stroke="#496079" stroke-width="2"/>
+<text x="696" y="515" font-size="16">«component»</text>
+<text x="696" y="546" font-size="21" font-weight="bold">Backend FastAPI</text>
+<path d="M1027,498 h19 v27 h-19 z M1022,503 h10 v6 h-10 z M1022,514 h10 v6 h-10 z" fill="#fff" stroke="#496079" stroke-width="1.5"/>
+<line x1="680" y1="562" x2="1060" y2="562" stroke="#496079"/><text x="696" y="593" font-size="17">api/main.py · Python</text><text x="696" y="620" font-size="17">carrega e confere os artefatos</text><text x="696" y="647" font-size="17">GET /health · POST /predict</text><text x="696" y="674" font-size="17">retorna previsão e moeda</text><rect x="35" y="485" width="270" height="205" fill="#f0f2f5" stroke="#496079" stroke-width="2"/>
+<text x="51" y="515" font-size="16">«component»</text>
+<text x="51" y="546" font-size="21" font-weight="bold">Aplicação cliente</text>
+<path d="M272,498 h19 v27 h-19 z M267,503 h10 v6 h-10 z M267,514 h10 v6 h-10 z" fill="#fff" stroke="#496079" stroke-width="1.5"/>
+<line x1="35" y1="562" x2="305" y2="562" stroke="#496079"/><text x="51" y="593" font-size="17">Swagger UI / curl</text><text x="51" y="620" font-size="17">PowerShell / Postman</text><text x="51" y="647" font-size="17">requisição e resposta HTTP</text><path d="M1220 460 H1160 V590 H1060" fill="none" stroke="#26344b" stroke-width="2" stroke-dasharray="8 5" marker-end="url(#arrow)"/><text x="1330" y="595" text-anchor="middle" font-size="16">volume artifacts:ro</text><path d="M305 548 H680" fill="none" stroke="#26344b" stroke-width="2"  marker-end="url(#arrow)"/><text x="490" y="534" text-anchor="middle" font-size="16">solicitação HTTP + JSON</text><path d="M680 638 H305" fill="none" stroke="#26344b" stroke-width="2"  marker-end="url(#arrow)"/><text x="490" y="624" text-anchor="middle" font-size="16">resposta JSON · previsão</text><text x="40" y="767" font-size="16">As setas indicam o fluxo dos dados. O backend usa o artefato já treinado; o treinamento é executado separadamente.</text></g></svg>

@@ -1,0 +1,67 @@
+api-1  | Importing plotly failed. Interactive plots will not work.
+api-1  | Traceback (most recent call last):
+api-1  |   File "/usr/local/bin/uvicorn", line 8, in <module>
+api-1  |     sys.exit(main())
+api-1  |              ^^^^^^
+api-1  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1631, in __call__
+api-1  |     return self.main(*args, **kwargs)
+api-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+api-1  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1552, in main
+api-1  |     rv = self.invoke(ctx)
+api-1  |          ^^^^^^^^^^^^^^^^
+api-1  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 1415, in invoke
+api-1  |     return ctx.invoke(self.callback, **ctx.params)
+api-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+api-1  |   File "/usr/local/lib/python3.11/site-packages/click/core.py", line 910, in invoke
+api-1  |     return callback(*args, **kwargs)
+api-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+api-1  |   File "/usr/local/lib/python3.11/site-packages/uvicorn/main.py", line 412, in main
+api-1  |     run(
+api-1  |   File "/usr/local/lib/python3.11/site-packages/uvicorn/main.py", line 579, in run
+api-1  |     server.run()
+api-1  |   File "/usr/local/lib/python3.11/site-packages/uvicorn/server.py", line 66, in run
+api-1  |     return asyncio.run(self.serve(sockets=sockets))
+api-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+api-1  |   File "/usr/local/lib/python3.11/asyncio/runners.py", line 190, in run
+api-1  |     return runner.run(main)
+api-1  |            ^^^^^^^^^^^^^^^^
+api-1  |   File "/usr/local/lib/python3.11/asyncio/runners.py", line 118, in run
+api-1  |     return self._loop.run_until_complete(task)
+api-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+api-1  |   File "/usr/local/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+api-1  |     return future.result()
+api-1  |            ^^^^^^^^^^^^^^^
+api-1  |   File "/usr/local/lib/python3.11/site-packages/uvicorn/server.py", line 70, in serve
+api-1  |     await self._serve(sockets)
+api-1  |   File "/usr/local/lib/python3.11/site-packages/uvicorn/server.py", line 77, in _serve
+api-1  |     config.load()
+api-1  |   File "/usr/local/lib/python3.11/site-packages/uvicorn/config.py", line 435, in load
+api-1  |     self.loaded_app = import_from_string(self.app)
+api-1  |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+api-1  |   File "/usr/local/lib/python3.11/site-packages/uvicorn/importer.py", line 19, in import_from_string
+api-1  |     module = importlib.import_module(module_str)
+api-1  |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+api-1  |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+api-1  |     return _bootstrap._gcd_import(name[level:], package, level)
+api-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+api-1  |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+api-1  |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+api-1  |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+api-1  |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+api-1  |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+api-1  |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+api-1  |   File "/app/api/main.py", line 42, in <module>
+api-1  |     class PredictionRequest(BaseModel):
+api-1  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_model_construction.py", line 219, in __new__
+api-1  |     set_model_fields(cls, bases, config_wrapper, ns_resolver)
+api-1  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_model_construction.py", line 537, in set_model_fields
+api-1  |     fields, class_vars = collect_model_fields(cls, bases, config_wrapper, ns_resolver, typevars_map=typevars_map)
+api-1  |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+api-1  |   File "/usr/local/lib/python3.11/site-packages/pydantic/_internal/_fields.py", line 228, in collect_model_fields
+api-1  |     field_info = FieldInfo_.from_annotated_attribute(ann_type, default)
+api-1  |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+api-1  |   File "/usr/local/lib/python3.11/site-packages/pydantic/fields.py", line 368, in from_annotated_attribute
+api-1  |     raise PydanticUserError(
+api-1  | pydantic.errors.PydanticUserError: Error when building FieldInfo from annotated attribute. Make sure you don't have any field name clashing with a type annotation 
+api-1  | 
+api-1  | For further information visit https://errors.pydantic.dev/2.10/u/unevaluable-type-annotation

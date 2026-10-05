@@ -1,0 +1,6 @@
+2026-10-05 19:48:40,594 INFO Inicio UTC: 2026-10-05T19:48:40.594498+00:00; Python 3.11.17; Prophet 1.2.2
+2026-10-05 19:48:40,651 INFO Dados: CryptoDataDownload / Binance BTCUSDT (fallback usado após limite de requisições do Yahoo Finance); 2024-01-01 a 2025-12-31; 731 registros; SHA256 396adba8f048a12b3cd984df141d4addbb43808b4b9dfef3263825e1a3630396
+2026-10-05 19:48:52,596 INFO Validacao original: {'mae_usdt': 4647.649088201303, 'mape_percent': 4.781058999846006, 'rmse_usdt': 6008.073979130774}
+2026-10-05 19:50:47,463 INFO Validacao preco_7d_cp0.05: {'mae_usdt': 2024.1499546869284, 'mape_percent': 2.084673409678514, 'rmse_usdt': 2641.3677200707266}
+2026-10-05 19:54:13,142 INFO Validacao preco_7d_cp0.5: {'mae_usdt': 2297.974687004805, 'mape_percent': 2.398532354649623, 'rmse_usdt': 3048.0631919844336}
+2026-10-05 19:54:19,482 INFO Validacao preco_14d_cp0.05: {'mae_usdt': 2238.3923492406857, 'mape_percent': 2.2909420428977953, 'rmse_usdt': 2803.3736984822904}

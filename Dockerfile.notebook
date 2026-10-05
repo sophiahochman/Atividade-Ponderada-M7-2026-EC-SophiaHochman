@@ -4,4 +4,4 @@ WORKDIR /workspace
 COPY requirements-notebook.txt .
 RUN pip install --no-cache-dir -r requirements-notebook.txt
 WORKDIR /workspace/notebook
-CMD ["jupyter", "nbconvert", "--to", "notebook", "--execute", "--inplace", "treinamento_prophet.ipynb"]
+CMD ["jupyter", "nbconvert", "--to", "notebook", "--execute", "--inplace", "--ExecutePreprocessor.timeout=1800", "treinamento_prophet.ipynb"]

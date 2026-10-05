@@ -1,0 +1,11 @@
+ Container atividade-ponderada-m7-2026-ec-sophiahochman-train-run-ee225e17f222 Creating 
+ Container atividade-ponderada-m7-2026-ec-sophiahochman-train-run-ee225e17f222 Created 
+Importing plotly failed. Interactive plots will not work.
+test_dataset_and_split (__main__.ArtifactTests.test_dataset_and_split) ... ok
+test_rejects_missing_day (__main__.ArtifactTests.test_rejects_missing_day) ... ok
+test_serialization_and_prediction (__main__.ArtifactTests.test_serialization_and_prediction) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.155s
+
+OK

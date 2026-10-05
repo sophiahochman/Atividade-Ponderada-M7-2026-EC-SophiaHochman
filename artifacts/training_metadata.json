@@ -1,14 +1,73 @@
 {
-  "source": "CryptoDataDownload / Binance BTCUSDT (fallback usado ap\u00f3s limite de requisi\u00e7\u00f5es do Yahoo Finance)",
+  "model": "Prophet",
+  "prophet_version": "1.2.2",
+  "created_at_utc": "2026-10-05T19:59:06.795719+00:00",
+  "source": "CryptoDataDownload / Binance BTCUSDT (fallback usado após limite de requisições do Yahoo Finance)",
+  "symbol": "BTCUSDT",
+  "quote_currency": "USDT",
   "period_start": "2024-01-01",
   "period_end": "2025-12-31",
   "total_rows": 731,
-  "train_rows": 584,
+  "model_train_rows": 730,
   "test_rows": 147,
-  "evaluation_method": "walk-forward de um dia \u00e0 frente com janela expansiva",
-  "prophet_mae_usd": 6873.25,
-  "prophet_mape_percent": 6.86,
-  "baseline_mae_usd": 1593.63,
-  "baseline_mape_percent": 1.52,
-  "model": "Prophet"
+  "validation_blocks": [
+    {
+      "start": "2024-12-31",
+      "end": "2025-01-29"
+    },
+    {
+      "start": "2025-03-31",
+      "end": "2025-04-29"
+    },
+    {
+      "start": "2025-07-08",
+      "end": "2025-08-06"
+    }
+  ],
+  "evaluation_method": "walk-forward de um dia; selecao em 3 blocos anteriores ao teste",
+  "test_limitation": "periodo final ja consultado em experimentos anteriores",
+  "selected_config": {
+    "name": "retorno_todo_semanalTrue",
+    "window": null,
+    "target": "log_return",
+    "params": {
+      "growth": "flat",
+      "daily_seasonality": false,
+      "weekly_seasonality": true,
+      "yearly_seasonality": false
+    }
+  },
+  "deployed_config": {
+    "name": "retorno_todo_semanalTrue",
+    "window": null,
+    "target": "log_return",
+    "params": {
+      "growth": "flat",
+      "daily_seasonality": false,
+      "weekly_seasonality": true,
+      "yearly_seasonality": false
+    }
+  },
+  "test_metrics": {
+    "selected": {
+      "mae_usdt": 1604.1041261845571,
+      "mape_percent": 1.5387211000679544,
+      "rmse_usdt": 2127.6249459573446
+    },
+    "original": {
+      "mae_usdt": 6878.2534558415155,
+      "mape_percent": 6.8665076108064955,
+      "rmse_usdt": 8930.144285348197
+    },
+    "baseline": {
+      "mae_usdt": 1593.6343537414966,
+      "mape_percent": 1.523538714002367,
+      "rmse_usdt": 2112.4280428433904
+    }
+  },
+  "last_close": 87648.22,
+  "forecast_date": "2026-01-01",
+  "example_prediction": 87495.56,
+  "data_sha256": "396adba8f048a12b3cd984df141d4addbb43808b4b9dfef3263825e1a3630396",
+  "model_sha256": "6d189c40e14d1da98a9e99c26a5dc339e4b55b8503bf859d1589fe0fdc8a4818"
 }

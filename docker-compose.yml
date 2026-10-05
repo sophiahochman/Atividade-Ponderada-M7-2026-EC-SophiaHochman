@@ -4,6 +4,37 @@ services:
       context: .
       dockerfile: Dockerfile.api
     ports:
-      - "8000:8000"
+      - "127.0.0.1:8000:8000"
     volumes:
       - ./artifacts:/app/artifacts:ro
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=3)"]
+      interval: 30s
+      timeout: 5s
+      start_period: 30s
+      retries: 3
+
+  train:
+    profiles: ["training"]
+    build:
+      context: .
+      dockerfile: Dockerfile.notebook
+    volumes:
+      - ./data:/workspace/data:ro
+      - ./trainer:/workspace/trainer:ro
+      - ./notebook:/workspace/notebook
+      - ./artifacts:/workspace/artifacts
+      - ./assets:/workspace/assets
+
+  download:
+    profiles: ["data"]
+    build:
+      context: .
+      dockerfile: Dockerfile.download
+    volumes:
+      - ./data:/app/data

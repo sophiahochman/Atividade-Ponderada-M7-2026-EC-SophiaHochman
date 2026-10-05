@@ -1,0 +1,28 @@
+2026-10-05 19:56:37,497 INFO Inicio UTC: 2026-10-05T19:56:37.496983+00:00; Python 3.11.17; Prophet 1.2.2
+2026-10-05 19:56:37,526 INFO Dados: CryptoDataDownload / Binance BTCUSDT (fallback usado após limite de requisições do Yahoo Finance); 2024-01-01 a 2025-12-31; 731 registros; SHA256 396adba8f048a12b3cd984df141d4addbb43808b4b9dfef3263825e1a3630396
+2026-10-05 19:56:49,051 INFO Validacao original: {'mae_usdt': 4647.649088201303, 'mape_percent': 4.781058999846006, 'rmse_usdt': 6008.073979130774}
+2026-10-05 19:57:03,246 INFO Validacao preco_7d_cp0.05: {'mae_usdt': 2020.8536523405483, 'mape_percent': 2.079114951891015, 'rmse_usdt': 2553.1950674602563}
+2026-10-05 19:57:35,328 INFO Validacao preco_7d_cp0.5: {'mae_usdt': 2297.974593672932, 'mape_percent': 2.398532267514453, 'rmse_usdt': 3048.06314285032}
+2026-10-05 19:57:39,081 INFO Validacao preco_14d_cp0.05: {'mae_usdt': 2245.629440642511, 'mape_percent': 2.288958453000597, 'rmse_usdt': 2772.4789372712285}
+2026-10-05 19:57:43,516 INFO Validacao preco_14d_cp0.5: {'mae_usdt': 2298.2366100416175, 'mape_percent': 2.39885935436568, 'rmse_usdt': 3048.397898650697}
+2026-10-05 19:57:46,356 INFO Validacao preco_30d_cp0.05: {'mae_usdt': 2363.7597217211487, 'mape_percent': 2.395051261064401, 'rmse_usdt': 2983.0450826666083}
+2026-10-05 19:57:50,537 INFO Validacao preco_30d_cp0.5: {'mae_usdt': 1873.1766281265216, 'mape_percent': 1.9034211207291905, 'rmse_usdt': 2474.641247325658}
+2026-10-05 19:57:53,584 INFO Validacao preco_60d_cp0.05: {'mae_usdt': 2789.6991573820214, 'mape_percent': 2.803737252117408, 'rmse_usdt': 3540.9668695861237}
+2026-10-05 19:57:58,428 INFO Validacao preco_60d_cp0.5: {'mae_usdt': 1972.596416503021, 'mape_percent': 2.026616704253491, 'rmse_usdt': 2553.214905557805}
+2026-10-05 19:58:01,717 INFO Validacao preco_90d_cp0.05: {'mae_usdt': 3063.8454119993507, 'mape_percent': 3.0615598988848673, 'rmse_usdt': 3775.954486021949}
+2026-10-05 19:58:05,951 INFO Validacao preco_90d_cp0.5: {'mae_usdt': 2180.2433992550805, 'mape_percent': 2.2271553495100362, 'rmse_usdt': 2764.8430463481527}
+2026-10-05 19:58:09,988 INFO Validacao preco_180d_cp0.05: {'mae_usdt': 4112.58571378285, 'mape_percent': 4.131857294236431, 'rmse_usdt': 4938.249486835427}
+2026-10-05 19:58:15,942 INFO Validacao preco_180d_cp0.5: {'mae_usdt': 2519.739849741658, 'mape_percent': 2.549343687598946, 'rmse_usdt': 3082.727284020786}
+2026-10-05 19:58:18,448 INFO Validacao retorno_90_semanalFalse: {'mae_usdt': 1518.4826264670594, 'mape_percent': 1.5676100402031334, 'rmse_usdt': 2074.0266526122173}
+2026-10-05 19:58:21,053 INFO Validacao retorno_90_semanalTrue: {'mae_usdt': 1516.1626600114932, 'mape_percent': 1.5690914397268112, 'rmse_usdt': 2110.0561280619204}
+2026-10-05 19:58:23,863 INFO Validacao retorno_180_semanalFalse: {'mae_usdt': 1480.670684749177, 'mape_percent': 1.5266308221690863, 'rmse_usdt': 2051.9215606329735}
+2026-10-05 19:58:26,893 INFO Validacao retorno_180_semanalTrue: {'mae_usdt': 1467.566613511335, 'mape_percent': 1.5169856041740615, 'rmse_usdt': 2028.7512629597784}
+2026-10-05 19:58:29,855 INFO Validacao retorno_todo_semanalFalse: {'mae_usdt': 1482.497604234263, 'mape_percent': 1.5277660094957501, 'rmse_usdt': 2049.9394998422213}
+2026-10-05 19:58:33,270 INFO Validacao retorno_todo_semanalTrue: {'mae_usdt': 1461.230822565668, 'mape_percent': 1.50400540400801, 'rmse_usdt': 2051.173522850085}
+2026-10-05 19:58:33,283 INFO Escolha pela validacao: {"name": "retorno_todo_semanalTrue", "window": null, "target": "log_return", "params": {"growth": "flat", "daily_seasonality": false, "weekly_seasonality": true, "yearly_seasonality": false}}
+2026-10-05 19:59:06,140 INFO Teste selected: {'mae_usdt': 1604.1041261845571, 'mape_percent': 1.5387211000679544, 'rmse_usdt': 2127.6249459573446}
+2026-10-05 19:59:06,143 INFO Teste original: {'mae_usdt': 6878.2534558415155, 'mape_percent': 6.8665076108064955, 'rmse_usdt': 8930.144285348197}
+2026-10-05 19:59:06,146 INFO Teste baseline: {'mae_usdt': 1593.6343537414966, 'mape_percent': 1.523538714002367, 'rmse_usdt': 2112.4280428433904}
+2026-10-05 19:59:06,150 INFO Configuracao a exportar: retorno_todo_semanalTrue
+2026-10-05 19:59:06,804 INFO Artefatos exportados; previsao para 2026-01-01: 87495.56 USDT
+2026-10-05 19:59:06,808 INFO Fim UTC: 2026-10-05T19:59:06.808521+00:00

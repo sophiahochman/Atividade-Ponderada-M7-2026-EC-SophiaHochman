@@ -5,6 +5,7 @@ python prophet_experiment.py /workspace/data/btc_usd_2024_2025.csv
 """
 
 import logging
+import math
 import sys
 
 import pandas as pd
@@ -14,7 +15,9 @@ from sklearn.metrics import mean_absolute_error, mean_absolute_percentage_error
 logging.getLogger("cmdstanpy").setLevel(logging.WARNING)
 
 
-def evaluate_walk_forward(series, start, end, initial_history, config=None):
+def evaluate_walk_forward(
+    series, start, end, initial_history, config=None, target_transform="price"
+):
     """Avalia previsões de um dia à frente usando apenas o histórico disponível."""
     history = series.iloc[:initial_history].copy()
     predictions = []
@@ -24,10 +27,24 @@ def evaluate_walk_forward(series, start, end, initial_history, config=None):
         if config is None:
             predictions.append(float(history["y"].iloc[-1]))
         else:
+            model_history = history[["ds", "y"]].copy()
+            if target_transform == "log_price":
+                model_history["y"] = model_history["y"].map(math.log)
+            elif target_transform == "log_return":
+                model_history["y"] = model_history["y"].map(math.log).diff()
+                model_history = model_history.dropna()
+
             model = Prophet(**config)
-            model.fit(history)
+            model.fit(model_history)
             forecast = model.predict(current_day[["ds"]])
-            predictions.append(float(forecast["yhat"].iloc[0]))
+            predicted_value = float(forecast["yhat"].iloc[0])
+            if target_transform == "log_price":
+                predicted_value = math.exp(predicted_value)
+            elif target_transform == "log_return":
+                predicted_value = float(history["y"].iloc[-1]) * math.exp(
+                    predicted_value
+                )
+            predictions.append(predicted_value)
         history = pd.concat([history, current_day], ignore_index=True)
 
     actual = series["y"].iloc[start:end].to_numpy()
@@ -54,34 +71,55 @@ def main():
     test_start = validation_end
 
     configs = {
-        "prophet_atual": {
+        "prophet_original": ("price", {
             "daily_seasonality": False,
             "weekly_seasonality": True,
             "yearly_seasonality": True,
-        },
-        "sem_sazonalidade_anual": {
+        }),
+        "preco_sem_sazonalidade_anual": ("price", {
             "daily_seasonality": False,
             "weekly_seasonality": True,
             "yearly_seasonality": False,
-        },
-        "tendencia_menos_flexivel": {
+        }),
+        "preco_tendencia_menos_flexivel": ("price", {
             "daily_seasonality": False,
             "weekly_seasonality": True,
             "yearly_seasonality": False,
             "changepoint_prior_scale": 0.01,
-        },
-        "tendencia_mais_flexivel": {
+        }),
+        "preco_tendencia_mais_flexivel": ("price", {
             "daily_seasonality": False,
             "weekly_seasonality": True,
             "yearly_seasonality": False,
             "changepoint_prior_scale": 0.5,
-        },
-        "sazonalidade_multiplicativa": {
+        }),
+        "preco_sazonalidade_multiplicativa": ("price", {
             "daily_seasonality": False,
             "weekly_seasonality": True,
             "yearly_seasonality": True,
             "seasonality_mode": "multiplicative",
-        },
+        }),
+        "log_preco": ("log_price", {
+            "daily_seasonality": False,
+            "weekly_seasonality": True,
+            "yearly_seasonality": True,
+        }),
+        "log_preco_sem_anual": ("log_price", {
+            "daily_seasonality": False,
+            "weekly_seasonality": True,
+            "yearly_seasonality": False,
+            "changepoint_prior_scale": 0.01,
+        }),
+        "retorno_log_diario": ("log_return", {
+            "daily_seasonality": False,
+            "weekly_seasonality": True,
+            "yearly_seasonality": False,
+        }),
+        "retorno_log_sem_sazonalidade": ("log_return", {
+            "daily_seasonality": False,
+            "weekly_seasonality": False,
+            "yearly_seasonality": False,
+        }),
     }
 
     print(
@@ -96,9 +134,14 @@ def main():
         f"MAE={baseline['MAE']:.2f}, MAPE={baseline['MAPE']:.2f}%"
     )
 
-    for name, config in configs.items():
+    for name, (target_transform, config) in configs.items():
         validation[name] = evaluate_walk_forward(
-            series, train_end, validation_end, train_end, config
+            series,
+            train_end,
+            validation_end,
+            train_end,
+            config,
+            target_transform,
         )
         result = validation[name]
         print(f"{name}: MAE={result['MAE']:.2f}, MAPE={result['MAPE']:.2f}%")
@@ -109,11 +152,20 @@ def main():
         "referencia_dia_anterior": evaluate_walk_forward(
             series, validation_end, count, validation_end
         ),
-        "prophet_atual": evaluate_walk_forward(
-            series, validation_end, count, validation_end, configs["prophet_atual"]
+        "prophet_original": evaluate_walk_forward(
+            series,
+            validation_end,
+            count,
+            validation_end,
+            configs["prophet_original"][1],
         ),
         "config_escolhida": evaluate_walk_forward(
-            series, validation_end, count, validation_end, configs[selected_name]
+            series,
+            validation_end,
+            count,
+            validation_end,
+            configs[selected_name][1],
+            configs[selected_name][0],
         ),
     }
 

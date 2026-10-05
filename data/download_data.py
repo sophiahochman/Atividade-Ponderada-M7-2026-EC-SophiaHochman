@@ -1,13 +1,18 @@
 """Baixa e salva o histórico diário de BTC usado no projeto.
 
-Yahoo Finance é a fonte principal. CryptoDataDownload é um fallback indicado no
-enunciado caso o Yahoo bloqueie temporariamente muitas requisições.
+CryptoDataDownload é o padrão para manter o par BTCUSDT da entrega.
+Yahoo Finance e fallback automático ficam disponíveis por --source.
 """
 
+import argparse
+from datetime import datetime, timezone
+import hashlib
 import json
 import os
 from pathlib import Path
+from urllib.request import Request, urlopen
 
+import numpy as np
 import pandas as pd
 import yfinance as yf
 
@@ -41,7 +46,9 @@ def from_yahoo() -> pd.DataFrame:
 
 def from_crypto_data_download() -> pd.DataFrame:
     # A primeira linha do CSV é informativa; por isso skiprows=1.
-    raw = pd.read_csv(CDD_URL, skiprows=1)
+    request = Request(CDD_URL, headers={"User-Agent": "atividade-m7/1.0"})
+    with urlopen(request, timeout=60) as response:
+        raw = pd.read_csv(response, skiprows=1)
     normalized = {column.lower().strip(): column for column in raw.columns}
 
     def column(name: str) -> str:
@@ -69,21 +76,40 @@ def from_crypto_data_download() -> pd.DataFrame:
 
 
 def main() -> None:
-    try:
-        data = from_yahoo()
-        source = "Yahoo Finance via yfinance (BTC-USD)"
-    except Exception as yahoo_error:
-        print(f"Yahoo Finance indisponível: {yahoo_error}")
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--source", choices=["cdd", "yahoo", "auto"], default="cdd",
+                        help="cdd mantém o par BTCUSDT usado na entrega; auto permite fallback")
+    args = parser.parse_args()
+    if args.source == "cdd":
         data = from_crypto_data_download()
         source = "CryptoDataDownload / Binance (BTCUSDT)"
+    elif args.source == "yahoo":
+        data = from_yahoo()
+        source = "Yahoo Finance via yfinance (BTC-USD)"
+    else:
+        try:
+            data = from_yahoo()
+            source = "Yahoo Finance via yfinance (BTC-USD)"
+        except Exception as yahoo_error:
+            print(f"Yahoo Finance indisponível: {yahoo_error}")
+            data = from_crypto_data_download()
+            source = "CryptoDataDownload / Binance (BTCUSDT)"
 
-    if len(data) < 700:
-        raise RuntimeError(f"A base tem somente {len(data)} registros; eram esperados ao menos 700.")
+    expected = pd.date_range(START_DATE, END_DATE, inclusive="left")
+    if not pd.DatetimeIndex(data.Date).equals(expected):
+        raise RuntimeError("A fonte não retornou todos os 731 dias do período solicitado.")
+    prices = data[["Open", "High", "Low", "Close"]].apply(pd.to_numeric, errors="raise")
+    if not np.isfinite(prices.to_numpy()).all() or (prices <= 0).any().any():
+        raise RuntimeError("A fonte retornou preços inválidos.")
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     data["Date"] = data["Date"].dt.strftime("%Y-%m-%d")
     data.to_csv(OUTPUT_PATH, index=False)
     (OUTPUT_PATH.parent / "data_source.json").write_text(
-        json.dumps({"source": source, "downloaded_period": [data["Date"].iloc[0], data["Date"].iloc[-1]]}, indent=2),
+        json.dumps({"source": source,
+                    "downloaded_at_utc": datetime.now(timezone.utc).isoformat(),
+                    "downloaded_period": [data["Date"].iloc[0], data["Date"].iloc[-1]],
+                    "rows": len(data),
+                    "sha256": hashlib.sha256(OUTPUT_PATH.read_bytes()).hexdigest()}, indent=2),
         encoding="utf-8",
     )
     print(f"Fonte usada: {source}")
