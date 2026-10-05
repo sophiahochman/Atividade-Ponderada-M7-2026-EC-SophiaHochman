@@ -1,0 +1,14 @@
+{
+  "source": "CryptoDataDownload / Binance BTCUSDT (fallback usado ap\u00f3s limite de requisi\u00e7\u00f5es do Yahoo Finance)",
+  "period_start": "2024-01-01",
+  "period_end": "2025-12-31",
+  "total_rows": 731,
+  "train_rows": 584,
+  "test_rows": 147,
+  "evaluation_method": "walk-forward de um dia \u00e0 frente com janela expansiva",
+  "prophet_mae_usd": 6873.25,
+  "prophet_mape_percent": 6.86,
+  "baseline_mae_usd": 1593.63,
+  "baseline_mape_percent": 1.52,
+  "model": "Prophet"
+}

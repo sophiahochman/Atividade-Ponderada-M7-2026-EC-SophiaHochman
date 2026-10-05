@@ -1,0 +1,7 @@
+FROM python:3.11-slim
+
+WORKDIR /workspace
+COPY requirements-notebook.txt .
+RUN pip install --no-cache-dir -r requirements-notebook.txt
+WORKDIR /workspace/notebook
+CMD ["jupyter", "nbconvert", "--to", "notebook", "--execute", "--inplace", "treinamento_prophet.ipynb"]

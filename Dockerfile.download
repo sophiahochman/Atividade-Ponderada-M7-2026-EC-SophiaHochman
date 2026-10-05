@@ -1,0 +1,9 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+COPY requirements-download.txt .
+RUN pip install --no-cache-dir -r requirements-download.txt
+COPY data/download_data.py /app/download_data.py
+
+ENV DATA_DIR=/app/data
+CMD ["python", "/app/download_data.py"]
